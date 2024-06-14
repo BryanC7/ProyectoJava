@@ -42,7 +42,7 @@ public class ClienteServicio {
         }
     }
 
-    public void agregarCliente() {
+    public void crearCliente() {
         Cliente cliente = new Cliente();
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- Crear Cliente ----------");
@@ -62,13 +62,22 @@ public class ClienteServicio {
 
         cliente.setNombreCategoria(CategoriaEnum.ACTIVO);
 
-        getListaClientes().add(cliente);
+        agregarCliente(cliente);
         System.out.println("Cliente agregado correctamente");
         u.tiempoEspera();
         u.limpiarPantalla();
 
         System.out.println(" ");
         System.out.println("---------------------------------------");
+
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        if(cliente.getRunCliente() == null || cliente.getNombreCliente() == null || cliente.getApellidoCliente() == null || cliente.getAniosCliente() == 0 || cliente.getNombreCategoria() == null) {
+            throw new IllegalArgumentException("Los datos del cliente no pueden ser nulos");
+        } else {
+            getListaClientes().add(cliente);
+        }
     }
 
     public void editarCliente(List<Cliente> clientes) {

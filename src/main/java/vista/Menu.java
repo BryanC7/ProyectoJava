@@ -30,7 +30,6 @@ public class Menu {
 
     public void iniciarMenu() {
         String opcion;
-        String opcionExportar;
 
         do {
             System.out.println(" ");
@@ -48,7 +47,7 @@ public class Menu {
                     clienteServicio.listarClientes(clienteServicio.getListaClientes());
                     break;
                 case "2":
-                    clienteServicio.agregarCliente();
+                    clienteServicio.crearCliente();
                     break;
                 case "3":
                     clienteServicio.editarCliente(clienteServicio.getListaClientes());
@@ -58,20 +57,7 @@ public class Menu {
                     clienteServicio.getListaClientes().addAll(clientesCargados);
                     break;
                 case "5":
-                    do {
-                        System.out.println("Selecciona uno de los 2 formatos para exportar los datos:");
-                        System.out.println(1 + " Exportar .txt");
-                        System.out.println(2 + " Exportar .csv");
-                        opcionExportar = sc.nextLine();
-
-                        if(opcionExportar.equals("1")) {
-                            exportadorTxt.exportar(fileName, clienteServicio.getListaClientes(), ".txt");
-                        } else if(opcionExportar.equals("2")) {
-                            exportadorCsv.exportar(fileName, clienteServicio.getListaClientes(), ".csv");
-                        } else {
-                            System.out.println("Opción incorrecta. Inténtalo de nuevo");
-                        }
-                    } while (!opcionExportar.equals("1") && !opcionExportar.equals("2"));
+                    subMenuExportar();
                     break;
                 case "6":
                     terminarPrograma();
@@ -87,5 +73,23 @@ public class Menu {
         u.tiempoEspera();
         System.out.println("Acaba de salir del sistema");
         sc.close();
+    }
+
+    public void subMenuExportar() {
+        String opcionExportar;
+        do {
+            System.out.println("Selecciona uno de los 2 formatos para exportar los datos:");
+            System.out.println(1 + " Exportar .txt");
+            System.out.println(2 + " Exportar .csv");
+            opcionExportar = sc.nextLine();
+
+            if(opcionExportar.equals("1")) {
+                exportadorTxt.exportar(fileName, clienteServicio.getListaClientes(), ".txt");
+            } else if(opcionExportar.equals("2")) {
+                exportadorCsv.exportar(fileName, clienteServicio.getListaClientes(), ".csv");
+            } else {
+                System.out.println("Opción incorrecta. Inténtalo de nuevo");
+            }
+        } while (!opcionExportar.equals("1") && !opcionExportar.equals("2"));
     }
 }
