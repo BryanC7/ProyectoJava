@@ -53,8 +53,7 @@ public class Menu {
                     clienteServicio.editarCliente(clienteServicio.getListaClientes());
                     break;
                 case "4":
-                    List<Cliente> clientesCargados = archivoServicio.cargarDatos(fileName1);
-                    clienteServicio.getListaClientes().addAll(clientesCargados);
+                    archivoServicio.cargarDatos(fileName1, clienteServicio.getListaClientes());
                     break;
                 case "5":
                     subMenuExportar();
